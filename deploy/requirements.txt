@@ -1,0 +1,3 @@
+yolk
+Django==1.7.5
+oauth2

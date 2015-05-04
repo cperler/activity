@@ -1,0 +1,61 @@
+.popover {
+	min-width: 30em;
+}
+.popover-content {
+	max-height: 300px;                    
+	overflow-y: auto;
+}
+
+#api-activity-content .activity-site {
+	display:none;
+}
+
+#api-activity-content div:first-child.activity-site {
+	display:block;
+}
+
+#api-activity-nav>ul>li.active>a:hover, #api-activity-nav>ul>li>a:focus {
+	border-radius:2px;
+}
+
+.subnav {
+	display:none;
+	margin-bottom:0px;
+	min-height:initial;
+}
+
+.activity {
+	display: none;
+}
+
+.btn-default.active {
+	border-color: initial;
+	background-color: #428bca;
+	color: white;	
+	box-shadow: initial;
+	-webkit-box-shadow: initial;
+}
+
+cite, .date {
+	font-size: 77%;
+	color: #999;
+}
+
+cite {
+	font-weight: bold;
+}
+
+.tooltip-inner {
+	max-width: 300px;
+	text-align: left;
+}
+
+.avatar {
+	width: 48px;
+	height: 48px;
+}
+
+.activity-item {margin:10px;}
+.activity-item, .bd {overflow:hidden; _overflow:visible; zoom:1;}
+.activity-item .avatar {float:left; margin-right: 10px;}
+.activity-item .avatar img{display:block;}

@@ -1,0 +1,89 @@
+{% load staticfiles %}
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'activity.css' %}"/>
+	<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>	
+	<script src="{% static 'activity.js' %}"></script>
+</head>
+
+<body>
+	<div id="content-main">
+	  	<div class="container page-header">
+			<div class="row">
+				<div class="col-lg-4 left-rail">
+					<h1>Activity Viewer</h1>
+					<form name="identifiers" id="identifiers" class="form-horizontal" role="form">
+						<div class="form-group">
+							<label for="yahoo" class="col-lg-3">Yahoo</label>
+							<div class="col-lg-9">
+								<input required type="text" class="form-control" name="yahoo" id="yahoo" placeholder="Yahoo ID" value="{{ yahoo }}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="angellist" class="col-lg-3">AngelList</label>
+							<div class="col-lg-9">
+								<input required type="text" class="form-control" name="angellist" id="angellist" placeholder="AngelList ID" value="{{ angellist }}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="github" class="col-lg-3">GitHub</label>
+							<div class="col-lg-9">
+								<input required type="text" class="form-control" name="github" id="github" placeholder="GitHub ID" value="{{ github }}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="twitter" class="col-lg-3">Twitter</label>
+							<div class="col-lg-9">
+								<input required type="text" class="form-control" name="twitter" id="twitter" placeholder="Twitter ID" value="{{ twitter }}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="crunchbase" class="col-lg-3">Crunchbase</label>
+							<div class="col-lg-9">
+								<input required type="text" class="form-control" name="crunchbase" id="crunchbase" placeholder="Crunchbase ID" value="{{ crunchbase }}">
+							</div>
+						</div>
+	
+						<button type="submit" id="getem" class="btn btn-primary btn-lg">Go</button>
+					</form>
+				</div>
+        		<div class="col-lg-7 col-lg-offset-1 right-rail activity-panel">
+					<div id="api-activity">
+						<span class="warning">No activity available.</span>						
+						<div id="api-activity-nav">
+							<ul class="nav nav-pills"></ul>
+						</div>
+						<div id="api-activity-subnavs"></div>
+						<div id="api-activity-content"></div>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</div>	
+
+<script>
+	var company = {identifiers : {
+			'yahoo': '{{ yahoo }}',
+			'angellist': {{ angellist }},
+			'github': '{{ github }}',
+			'twitter': '{{ twitter }}'
+	}};
+	
+	Sherpa.ActivityStream.buildStream([
+		Sherpa.Activity.Yahoo(company.identifiers), 
+		Sherpa.Activity.AngelList(company.identifiers),
+		Sherpa.Activity.GitHub(company.identifiers),
+		Sherpa.Activity.Twitter({'identifiers':company.identifiers, 'exclude_tweets_about':false}),
+		// no longer works, see js file: Sherpa.Activity.CrunchBase(company.identifiers), 
+	]);
+</script>
+</body>
+</html>
